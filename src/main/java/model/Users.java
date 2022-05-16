@@ -10,7 +10,17 @@ public class Users {
     private int departmentId;
     private int id;
 
+    // constructor without the id
     public Users(String name, String role, String position, int departmentId) {
+        this.name = name;
+        this.role = role;
+        this.position = position;
+        this.departmentId = departmentId;
+        this.id = id;
+    }
+
+    // constructor with the id.
+    public Users(String name, String role, String position, int departmentId, int id) {
         this.name = name;
         this.role = role;
         this.position = position;
