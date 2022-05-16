@@ -9,7 +9,16 @@ public class News {
     private String departmental_title;
     int id;
 
+    // constructor without the id
     public News(String tittle, String description, String departmental_title) {
+        this.tittle = tittle;
+        this.description = description;
+        this.departmental_title = departmental_title;
+        this.id = id;
+    }
+
+    // constructor with the id
+    public News(String tittle, String description, String departmental_title, int id) {
         this.tittle = tittle;
         this.description = description;
         this.departmental_title = departmental_title;
