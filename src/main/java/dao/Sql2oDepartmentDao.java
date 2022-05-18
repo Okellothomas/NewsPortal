@@ -62,4 +62,9 @@ public class Sql2oDepartmentDao implements DepartmentDao {
     public void clearAll() {
 
     }
+
+    @Override
+    public void deleteById(int id) {
+
+    }
 }

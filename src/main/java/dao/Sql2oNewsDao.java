@@ -42,6 +42,11 @@ public class Sql2oNewsDao implements NewsDao{
     }
 
     @Override
+    public void deleteById() {
+
+    }
+
+    @Override
     public void clearAll() {
 
     }

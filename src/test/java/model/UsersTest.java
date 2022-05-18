@@ -51,7 +51,6 @@ public class UsersTest {
         assertEquals(0, newUserId.getId());
     }
 
-
     // the helper.
     public Users setNewUser(){
         return new Users("Okello", "developer", "Scrum master", 1);

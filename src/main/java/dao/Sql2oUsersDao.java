@@ -48,6 +48,16 @@ public class Sql2oUsersDao implements UsersDao {
     }
 
     @Override
+    public List<Users> usersNews(int new_id) {
+        return null;
+    }
+
+    @Override
+    public void deleteById(int id) {
+
+    }
+
+    @Override
     public void clearAll() {
 
     }

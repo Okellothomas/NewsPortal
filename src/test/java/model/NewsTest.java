@@ -44,7 +44,6 @@ public class NewsTest {
         assertEquals(0, newsId.getId());
     }
 
-
     // the helper.
     public News setNewNews(){
         return new News("promotion", "got promoted today", "IT");

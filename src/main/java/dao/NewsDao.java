@@ -18,7 +18,9 @@ public interface NewsDao {
 
     //update
 
-    //delete
+    //delete by id
+    void deleteById();
 
+    // delete all news instances.
     void clearAll();
 }
