@@ -40,6 +40,7 @@ public class Sql2oDepartmentDaoTest {
         assertEquals(2, sql2oDepartmentDao.getAll().size());
     }
 
+
     // the helper
     public Departments setNewDepartment(){
         return new Departments("IT", "our it department",12);
