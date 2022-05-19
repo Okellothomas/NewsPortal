@@ -17,6 +17,14 @@ public class Sql2oDepartmentDao implements DepartmentDao {
         this.sql2o = sql2o;
     }
 
+    public void getDrivers(){
+        try{
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void add(Departments department) {
 

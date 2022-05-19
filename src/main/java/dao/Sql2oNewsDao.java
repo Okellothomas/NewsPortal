@@ -15,6 +15,14 @@ public class Sql2oNewsDao implements NewsDao{
         this.sql2o = sql2o;
     }
 
+    public void getDrivers(){
+        try{
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void addNews(News news) {
 
