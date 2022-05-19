@@ -1,6 +1,7 @@
 package dao;
 
 import model.Departments;
+import model.News;
 import model.Users;
 import org.junit.After;
 import org.junit.Before;
@@ -40,6 +41,32 @@ public class Sql2oDepartmentDaoTest {
         assertEquals(2, sql2oDepartmentDao.getAll().size());
     }
 
+    @Test
+    public void existingDepartmentsCanBeFoundById() throws Exception {
+        Departments departments = setNewDepartment();
+        sql2oDepartmentDao.add(departments);
+        Departments foundDepartment = sql2oDepartmentDao.findById(departments.getId());
+        assertEquals(departments, foundDepartment);
+    }
+
+    @Test
+    public void deleteByIdDeletesCorrectDepartment_true() throws Exception {
+        Departments departments = setNewDepartment();
+        sql2oDepartmentDao.add(departments);
+        sql2oDepartmentDao.deleteById(departments.getId());
+        assertEquals(0,sql2oDepartmentDao.getAll().size());
+    }
+
+    @Test
+    public void clearAllDepartments() throws Exception {
+        Departments departments = setNewDepartment();
+        Departments departments1 = new Departments("Marketing", "our sales are low",34);
+        sql2oDepartmentDao.add(departments);
+        sql2oDepartmentDao.add(departments1);
+        int sizeofDao = sql2oDepartmentDao.getAll().size();
+        sql2oDepartmentDao.clearAll();
+        assertTrue(sizeofDao > 0 && sizeofDao >sql2oDepartmentDao.getAll().size());
+    }
 
     // the helper
     public Departments setNewDepartment(){

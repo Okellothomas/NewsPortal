@@ -1,5 +1,6 @@
 package dao;
 
+import model.Departments;
 import model.News;
 import model.Users;
 import org.junit.After;
@@ -40,6 +41,33 @@ public class Sql2oNewsDaoTest {
         sql2oNewsDao.addNews(news);
         sql2oNewsDao.addNews(news1);
         assertEquals(2,sql2oNewsDao.getAll().size());
+    }
+
+    @Test
+    public void existingNewsCanBeFoundById() throws Exception {
+        News news = setNewNews();
+        sql2oNewsDao.addNews(news);
+        News foundNews = sql2oNewsDao.findById(news.getId());
+        assertEquals(news, foundNews);
+    }
+
+    @Test
+    public void deleteByIdDeletesCorrectNews_true() throws Exception {
+        News news = setNewNews();
+        sql2oNewsDao.addNews(news);
+        sql2oNewsDao.deleteById(news.getId());
+        assertEquals(0,sql2oNewsDao.getAll().size());
+    }
+
+    @Test
+    public void clearAllNews() throws Exception {
+        News news = setNewNews();
+        News news1 = new News("Holidays","deadline is sure","Ok");
+        sql2oNewsDao.addNews(news);
+        sql2oNewsDao.addNews(news1);
+        int sizeOfDao = sql2oNewsDao.getAll().size();
+        sql2oNewsDao.clearAll();
+        assertTrue(sizeOfDao > 0 && sizeOfDao >sql2oNewsDao.getAll().size());
     }
 
     // the helper

@@ -1,14 +1,16 @@
 package dao;
 
+import model.Departments;
+import model.News;
 import model.Users;
+import org.h2.engine.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
 
 public class Sql2oUsersDaoTest {
 
@@ -40,6 +42,32 @@ public class Sql2oUsersDaoTest {
         assertEquals(2,sql2oUsersDao.getAll().size());
     }
 
+    @Test
+    public void existingUsersCanBeFoundById() throws Exception {
+        Users users = setNewUser();
+        sql2oUsersDao.add(users);
+        Users foundUsers = sql2oUsersDao.findById(users.getId());
+        assertEquals(users, foundUsers);
+    }
+
+    @Test
+    public void deleteByIdDeletesCorrectUsers_true() throws Exception {
+        Users users = setNewUser();
+        sql2oUsersDao.add(users);
+        sql2oUsersDao.deleteById(users.getId());
+        assertEquals(0,sql2oUsersDao.getAll().size());
+    }
+
+    @Test
+    public void clearAllUsers() throws Exception {
+        Users users = setNewUser();
+        Users users1 = new Users("John","developer","senior developer",5);
+        sql2oUsersDao.add(users);
+        sql2oUsersDao.add(users1);
+        int sizeofDao = sql2oUsersDao.getAll().size();
+        sql2oUsersDao.clearAll();
+        assertTrue(sizeofDao > 0 && sizeofDao >sql2oUsersDao.getAll().size());
+    }
 
     // the helper
     public Users setNewUser(){
