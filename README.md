@@ -40,6 +40,7 @@ $ alternatively, install the Harouk and using mvn harouk:display to do so in you
 $ sudo apt update - to update your system. 
 $ apt install postgresql postgresql-contrib - install the postgres database. 
 $ sudo -u postgres psql - navigate to postgres 
+$ Then copy and past the following lines of code or sql queries to the now open psql postres command to the create the news_portal database.
 $ CREATE DATABASE news_portal;
   
   \c news_portal
