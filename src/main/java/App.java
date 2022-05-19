@@ -1,12 +1,16 @@
 import dao.Sql2oDepartmentDao;
 import dao.Sql2oNewsDao;
 import dao.Sql2oUsersDao;
+import exceptions.ApiException;
 import model.Departments;
 import model.News;
 import model.Users;
 import org.sql2o.Sql2o;
 import com.google.gson.Gson;
 
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static  spark.Spark.*;
 
@@ -124,6 +128,18 @@ public class App {
             News news = sql2oNewsDao.findById(id);
             sql2oNewsDao.deleteById(id);
             return gson.toJson(news);
+        });
+
+        // apply the filters
+        exception(ApiException.class, (exception, request, response) -> {
+            ApiException err = exception;
+            Map<String, Object> jsonMap = new HashMap<>();
+            Gson gson = new Gson();
+            jsonMap.put("status", err.getStatus());
+            jsonMap.put("errorMessage", err.getMessage());
+            response.type("application/json");
+            response.status(err.getStatus());
+            response.body(gson.toJson(jsonMap));
         });
 
         after((req, res) ->{
