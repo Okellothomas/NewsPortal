@@ -26,7 +26,7 @@ public class Sql2oNewsDao implements NewsDao{
     @Override
     public void addNews(News news) {
 
-        String query = "INSERT INTO mentors (tittle,description,departmental_title) values(:tittle, :description, :departmental_title)";
+        String query = "INSERT INTO news (tittle,description,departmental_title) values(:tittle, :description, :departmental_title)";
 
         try (Connection conn = sql2o.open()) {
             int id = (int) conn.createQuery(query, true)
@@ -50,8 +50,16 @@ public class Sql2oNewsDao implements NewsDao{
     }
 
     @Override
-    public void deleteById() {
-
+    public void deleteById(int id) {
+        getDrivers();
+        String sql = "DELETE FROM news WHERE id = :id";
+        try(Connection conn = sql2o.open()){
+            conn.createQuery(sql)
+                    .addParameter("id",id)
+                    .executeUpdate();
+        }catch(Sql2oException e){
+            System.out.println(e);
+        }
     }
 
     @Override

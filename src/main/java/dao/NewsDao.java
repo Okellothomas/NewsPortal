@@ -19,7 +19,7 @@ public interface NewsDao {
     //update
 
     //delete by id
-    void deleteById();
+    void deleteById(int id);
 
     // delete all news instances.
     void clearAll();

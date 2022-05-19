@@ -28,7 +28,7 @@ public class Sql2oDepartmentDao implements DepartmentDao {
     @Override
     public void add(Departments department) {
 
-        String query = "INSERT INTO mentors (name,description,number_of_employees) values(:name, :description, :number_of_employees)";
+        String query = "INSERT INTO departments (name,description,number_of_employees) values(:name, :description, :number_of_employees)";
 
         try (Connection conn = sql2o.open()) {
             int id = (int) conn.createQuery(query, true)
@@ -48,31 +48,66 @@ public class Sql2oDepartmentDao implements DepartmentDao {
 
     @Override
     public List<Departments> getAll() {
-        return null;
+        getDrivers();
+        String sql = "SELECT * FROM departments";
+        try (Connection connection = sql2o.open()){
+            return connection.createQuery(sql)
+                    .executeAndFetch(Departments.class);
+        }
     }
 
     @Override
     public Departments findById(int id) {
-        return null;
+        getDrivers();
+        try(Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM departments WHERE id = :id")
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(Departments.class);
+        }
     }
 
     @Override
     public List<Users> getAllUsersInDepartment(int department_id) {
-        return null;
+        getDrivers();
+        String sql = "SELECT * FROM users";
+        try (Connection connection = sql2o.open()){
+            return connection.createQuery(sql)
+                    .executeAndFetch(Users.class);
+        }
     }
 
     @Override
     public List<News> getDepartmentNews(int id) {
-        return null;
+        getDrivers();
+        String sql = "SELECT * FROM news";
+        try (Connection connection = sql2o.open()){
+            return connection.createQuery(sql)
+                    .executeAndFetch(News.class);
+        }
     }
 
     @Override
     public void clearAll() {
-
+        getDrivers();
+        String sql = "DELETE from departments";
+        try(Connection con = sql2o.open()){
+            con.createQuery(sql)
+                    .executeUpdate();
+        }catch(Sql2oException e){
+            System.out.println(e);
+        }
     }
 
     @Override
     public void deleteById(int id) {
-
+        getDrivers();
+        String sql = "DELETE FROM departments WHERE id = :id";
+        try(Connection conn = sql2o.open()){
+            conn.createQuery(sql)
+                    .addParameter("id",id)
+                    .executeUpdate();
+        }catch(Sql2oException e){
+            System.out.println(e);
+        }
     }
 }

@@ -27,7 +27,7 @@ public class Sql2oUsersDao implements UsersDao {
     @Override
     public void add(Users user) {
 
-        String query = "INSERT INTO mentors (name,role,position,departmentId) values(:name, :role, :position, :departmentId)";
+        String query = "INSERT INTO users (name,role,position,departmentId) values(:name, :role, :position, :departmentId)";
 
         try (Connection conn = sql2o.open()) {
             int id = (int) conn.createQuery(query, true)
@@ -62,7 +62,15 @@ public class Sql2oUsersDao implements UsersDao {
 
     @Override
     public void deleteById(int id) {
-
+        getDrivers();
+        String sql = "DELETE FROM users WHERE id = :id";
+        try (Connection conn = sql2o.open()) {
+            conn.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        } catch (Sql2oException e) {
+            System.out.println(e);
+        }
     }
 
     @Override
