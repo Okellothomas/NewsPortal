@@ -22,8 +22,8 @@ public class App {
 //        String connect = "jdbc:h2:mem:testing;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
 //        Sql2o sql2o = new Sql2o(connect,"","");
 
-        String connect = "jdbc:postgresql://ec2-54-172-175-251.compute-1.amazonaws.com:5432/d19tsrp5ts9arv";
-        Sql2o sql2o = new Sql2o(connect,"acutsmyrvfxroj","f6f2568b1bedb19e5723424cd139ea089f13b9effb3756dcc39ca0ba0196a631");
+        String connect = "jdbc:postgresql://ec2-3-231-82-226.compute-1.amazonaws.com:5432/d6dsanfcjhqsba";
+        Sql2o sql2o = new Sql2o(connect,"fvbxjcrwrilvbc","3ac18d7720e3176c6eca559b2a73fabc64ff0fef9682b52e2fa0ef5ad356c178");
 
         Sql2oDepartmentDao sql2oDepartmentDao = new Sql2oDepartmentDao(sql2o);
         Sql2oNewsDao sql2oNewsDao = new Sql2oNewsDao(sql2o);

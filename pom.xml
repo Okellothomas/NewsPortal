@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.mycompany.app</groupId>
-    <artifactId>mywildfiretracker01</artifactId>
+    <artifactId>myapisure</artifactId>
     <version>1.0</version>
     <dependencies>
         <!-- We need to list out ALL dependencies our project needs. If you have dependencies not listed here, but sure to add them -->
@@ -44,6 +44,11 @@
             <artifactId>h2</artifactId>
             <version>1.4.191</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.5</version>
         </dependency>
     </dependencies>
     <build>
@@ -88,9 +93,9 @@
                 <configuration>
                     <jdkVersion>1.8</jdkVersion>
                     <!-- Change this to YOUR application name! -->
-                    <appName>mywildfiretracker01</appName>
+                    <appName>myapisure</appName>
                     <processTypes>
-                        <web>java -jar target/mywildfiretracker01-1.0-jar-with-dependencies.jar</web>
+                        <web>java -jar target/myapisure-1.0-jar-with-dependencies.jar</web>
                     </processTypes>
                 </configuration>
             </plugin>
