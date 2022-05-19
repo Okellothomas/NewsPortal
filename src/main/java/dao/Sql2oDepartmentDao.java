@@ -69,7 +69,7 @@ public class Sql2oDepartmentDao implements DepartmentDao {
     @Override
     public List<Users> getAllUsersInDepartment(int department_id) {
         getDrivers();
-        String sql = "SELECT * FROM users";
+        String sql = "SELECT * FROM users WHERE id = :id";
         try (Connection connection = sql2o.open()){
             return connection.createQuery(sql)
                     .executeAndFetch(Users.class);

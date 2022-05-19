@@ -1,5 +1,6 @@
 package dao;
 
+import model.Departments;
 import model.News;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -41,12 +42,22 @@ public class Sql2oNewsDao implements NewsDao{
 
     @Override
     public List<News> getAll() {
-        return null;
+        getDrivers();
+        String sql = "SELECT * FROM news";
+        try (Connection connection = sql2o.open()){
+            return connection.createQuery(sql)
+                    .executeAndFetch(News.class);
+        }
     }
 
     @Override
     public News findById(int id) {
-        return null;
+        getDrivers();
+        try(Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM news WHERE id = :id")
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(News.class);
+        }
     }
 
     @Override
@@ -64,6 +75,13 @@ public class Sql2oNewsDao implements NewsDao{
 
     @Override
     public void clearAll() {
-
+        getDrivers();
+        String sql = "DELETE from news";
+        try(Connection con = sql2o.open()){
+            con.createQuery(sql)
+                    .executeUpdate();
+        }catch(Sql2oException e){
+            System.out.println(e);
+        }
     }
 }
